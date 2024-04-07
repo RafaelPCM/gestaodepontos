@@ -1,4 +1,4 @@
-package com.logiquesistemas.gpjt.enums;
+package com.logiquesistemas.gestaodepontos.enums;
 
 public enum UserType {
   ADMIN("Administrador"),

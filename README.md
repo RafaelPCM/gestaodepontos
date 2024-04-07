@@ -120,9 +120,9 @@ Senha: 123456
 
 ##### PARA ACESSAR A DOCUMENTAÇÃO DE CADA API (SWAGGER)
 
-Swagger GPJT:
+Swagger Gestao De Pontos:
 
-http://localhost:8080/swagger-doc/gpjt/swagger-ui/index.html
+http://localhost:8080/swagger-doc/gestaodepontos/swagger-ui/index.html
 
 
 #### CONTRIBUIÇÕES

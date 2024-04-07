@@ -1,4 +1,4 @@
-package com.logiquesistemas.gpjt.controller;
+package com.logiquesistemas.gestaodepontos.exceptions;
 
 public class UnauthorizedUserException extends RuntimeException {
 

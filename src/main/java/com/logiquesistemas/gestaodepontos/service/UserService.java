@@ -1,9 +1,5 @@
-package com.logiquesistemas.gpjt.service;
+package com.logiquesistemas.gestaodepontos.service;
 
-import com.logiquesistemas.gpjt.enums.UserType;
-import com.logiquesistemas.gpjt.model.User;
-import com.logiquesistemas.gpjt.repository.UserRepository;
-import com.logiquesistemas.gpjt.utils.ValidarCPF;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +7,11 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.logiquesistemas.gestaodepontos.enums.UserType;
+import com.logiquesistemas.gestaodepontos.model.User;
+import com.logiquesistemas.gestaodepontos.repository.UserRepository;
+import com.logiquesistemas.gestaodepontos.utils.ValidarCPF;
 
 @Service
 public class UserService {
@@ -28,8 +29,13 @@ public class UserService {
 
   public User save(User user) {
     PasswordEncoder passwordEncoder = passwordEncoder();
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    return userRepository.save(user);
+    if (ValidarCPF.iscpf(user.getCpf())) {
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
+      return userRepository.save(user);
+    } else {
+      throw new InvalidDataException("CPF inválido");
+    }
+    
   }
 
   public PasswordEncoder passwordEncoder() {
