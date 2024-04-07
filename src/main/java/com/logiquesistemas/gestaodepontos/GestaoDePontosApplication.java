@@ -1,12 +1,12 @@
-package com.logiquesistemas.gpjt;
+package com.logiquesistemas.gestaodepontos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GpjtApplication {
+public class GestaoDePontosApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(GpjtApplication.class, args);
+    SpringApplication.run(GestaoDePontosApplication.class, args);
   }
 }

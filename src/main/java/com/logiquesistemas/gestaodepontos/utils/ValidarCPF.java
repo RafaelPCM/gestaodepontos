@@ -1,4 +1,4 @@
-package com.logiquesistemas.gpjt.utils;
+package com.logiquesistemas.gestaodepontos.utils;
 
 import java.util.InputMismatchException;
 

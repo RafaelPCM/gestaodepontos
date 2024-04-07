@@ -1,10 +1,10 @@
-// package com.logiquesistemas.gpjt;
+// package com.logiquesistemas.gestaodepontos;
 
 // import org.junit.jupiter.api.Test;
 // import org.springframework.boot.test.context.SpringBootTest;
 
 // @SpringBootTest
-// class GpjtApplicationTests {
+// class GestaoDePontosApplicationTests {
 
 // 	@Test
 // 	void contextLoads() {

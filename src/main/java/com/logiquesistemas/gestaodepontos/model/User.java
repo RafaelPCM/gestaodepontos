@@ -1,6 +1,5 @@
-package com.logiquesistemas.gpjt.model;
+package com.logiquesistemas.gestaodepontos.model;
 
-import com.logiquesistemas.gpjt.enums.UserType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+
+import com.logiquesistemas.gestaodepontos.enums.UserType;
+
 import lombok.Data;
 
 @Entity
