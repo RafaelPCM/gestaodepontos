@@ -1,4 +1,4 @@
-package com.logiquesistemas.gpjt.service;
+package com.logiquesistemas.gestaodepontos.service;
 
 public class InvalidDataException extends RuntimeException {
 

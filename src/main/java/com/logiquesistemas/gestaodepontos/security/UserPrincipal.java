@@ -1,13 +1,14 @@
-package com.logiquesistemas.gpjt.security;
+package com.logiquesistemas.gestaodepontos.security;
 
-import com.logiquesistemas.gpjt.enums.UserType;
-import com.logiquesistemas.gpjt.model.User;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import com.logiquesistemas.gestaodepontos.enums.UserType;
+import com.logiquesistemas.gestaodepontos.model.User;
 
 @Getter
 public class UserPrincipal {

@@ -1,9 +1,5 @@
-package com.logiquesistemas.gpjt.controller;
+package com.logiquesistemas.gestaodepontos.controller;
 
-import com.logiquesistemas.gpjt.enums.UserType;
-import com.logiquesistemas.gpjt.model.User;
-import com.logiquesistemas.gpjt.security.UserPrincipal;
-import com.logiquesistemas.gpjt.service.UserService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.logiquesistemas.gestaodepontos.enums.UserType;
+import com.logiquesistemas.gestaodepontos.model.User;
+import com.logiquesistemas.gestaodepontos.security.UserPrincipal;
+import com.logiquesistemas.gestaodepontos.service.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -43,12 +44,12 @@ public class UserController {
       .getAuthentication();
     UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
-    // Verifica se o usuário logado é um administrador
-    if (userPrincipal.getUserType().equals(UserType.ADMIN)) {
+    // Verifica se o usuario logado é um administrador
+    if (userPrincipal.getUserType() == UserType.ADMIN) {
       return userService.save(user);
     } else {
       throw new UnauthorizedUserException(
-        "Apenas administradores podem cadastrar usuários comuns."
+        "Apenas administradores podem cadastrar usuarios comuns."
       );
     }
   }

@@ -1,7 +1,5 @@
-package com.logiquesistemas.gpjt.security;
+package com.logiquesistemas.gestaodepontos.security;
 
-import com.logiquesistemas.gpjt.model.User;
-import com.logiquesistemas.gpjt.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.logiquesistemas.gestaodepontos.model.User;
+import com.logiquesistemas.gestaodepontos.repository.UserRepository;
 
 @Component
 @RequiredArgsConstructor
