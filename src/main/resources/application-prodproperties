@@ -1,0 +1,95 @@
+spring.application.name=gpjt
+
+# Configurações do banco de dados PostgreSQL
+
+
+spring.datasource.url=jdbc:postgresql://xxx.xxx.xxx:5432/gestaodepontos
+
+# Define a URL do banco de dados PostgreSQL, incluindo o host 
+
+
+spring.datasource.username=postgres
+
+# Define o nome de usuário para autenticação no banco de dados.
+
+
+spring.datasource.password=123
+
+# Define a senha associada ao nome de usuário para autenticação.
+
+
+# Configuração do driver JDBC
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Especifica a classe do driver JDBC para o PostgreSQL. 
+# Neste caso, usa-se o driver oficial do PostgreSQL.
+
+
+# Configuração do dialeto do Hibernate para PostgreSQL
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Define o dialeto do Hibernate para PostgreSQL, 
+# indicando como o Hibernate deve gerar SQL específico para esse banco de dados.
+
+
+# Configuração para atualização automática do esquema do banco de dados
+spring.jpa.hibernate.ddl-auto=update
+
+# Configura o Hibernate para atualizar automaticamente o 
+# esquema do banco de dados durante a inicialização da aplicação. 
+# Isso é útil durante o desenvolvimento.
+
+
+spring.devtools.restart.quiet-period=2s
+# Define um período de espera entre os reinícios do aplicativo. Neste caso, está definido como 2 segundos.
+
+
+spring.devtools.restart.enabled=true
+# Desativa a reinicialização automática do aplicativo quando houver alterações no código. Está configurado como false.
+
+
+spring.devtools.restart.poll-interval=3s
+# Define o intervalo de verificação para detectar mudanças no código-fonte. Neste caso, está definido como 3 segundos.
+
+
+spring.mvc.format.date=dd-MM-yyyy
+
+# Define o padrão de formatação para datas. 
+# Neste caso, o formato especificado é "ano-mês-dia", como "01-01-2022".
+
+
+spring.mvc.format.date-time=dd-MM-yyyy HH:mm:ss
+
+# Define o padrão de formatação para datas e horas. 
+# Neste caso, o formato especificado inclui também a hora e os minutos, como "01-01-2022 12:30:00".
+
+
+spring.mvc.format.time=HH:mm:ss
+
+# Define o padrão de formatação para horas. 
+# Neste caso, o formato especificado inclui apenas a hora, minutos e segundos, como "12:30:00".
+
+
+# spring.jackson.deserialization.fail-on-unknown-properties=true
+
+# Está relacionada ao comportamento do Jackson, 
+# que é a biblioteca padrão do Spring Boot para serialização e desserialização de JSON. 
+# Essa configuração define se a desserialização de JSON deve falhar (lançar uma exceção) 
+# quando o objeto de destino tem propriedades desconhecidas em relação aos dados JSON de entrada.
+
+
+# # Configurações CORS (Cross-Origin Resource Sharing):
+
+management.endpoints.web.cors.allowed-origins=*
+
+# Permite solicitações de qualquer origem.
+
+
+admin.standardUserName=admin
+
+# Define o nome de usuário padrão para a conta administrativa como "admin".
+
+
+admin.standardPassword=123
+
+# Define a senha padrão para a conta administrativa como "123".
