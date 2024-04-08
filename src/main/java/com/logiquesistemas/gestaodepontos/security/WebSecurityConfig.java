@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.logiquesistemas.gestaodepontos.enums.UserType;
+import com.logiquesistemas.gestaodepontos.enums.WorkdayType;
 import com.logiquesistemas.gestaodepontos.model.User;
 import com.logiquesistemas.gestaodepontos.repository.UserRepository;
 
@@ -43,6 +42,7 @@ public class WebSecurityConfig {
       adminUser.setPassword(passwordEncoder.encode("123"));
       adminUser.setUserType(UserType.ADMIN);
       adminUser.setFullname("Admin User");
+      adminUser.setWorkdayType(WorkdayType.SIX_HOUR_CONTINUOUS);
       userRepository.save(adminUser);
       System.out.println("Usuário administrador criado com sucesso.");
       System.out.println(
@@ -60,6 +60,7 @@ public class WebSecurityConfig {
       commonUser.setPassword(passwordEncoder.encode("123"));
       commonUser.setUserType(UserType.COMMON);
       commonUser.setFullname("Common User");
+      commonUser.setWorkdayType(WorkdayType.EIGHT_HOUR_WITH_BREAK);
       userRepository.save(commonUser);
       System.out.println("Usuário administrador criado com sucesso.");
       System.out.println(
