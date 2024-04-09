@@ -1,12 +1,15 @@
 package com.logiquesistemas.gestaodepontos.dto;
 
+import com.logiquesistemas.gestaodepontos.model.Workday;
+
 import lombok.Data;
 
 @Data
 public class WorkdaySummaryDTO {
-    private int totalWorkHours;
-    private int completedWorkHours;
-    private int exceededWorkHours;
-    private int remainingWorkHours;
+    private Workday workday;
+    private double totalWorkHours;
+    private double completedWorkHours;
+    private double exceededWorkHours;
+    private double remainingWorkHours;
     private boolean isWorkdayComplete;
 }

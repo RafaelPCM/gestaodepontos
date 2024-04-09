@@ -51,8 +51,4 @@ public class WorkdayEntryService {
         return workdayEntryRepository.findAll();
     }
 
-
-    public void deleteById(Long id) {
-        workdayEntryRepository.deleteById(id);
-    }
 }

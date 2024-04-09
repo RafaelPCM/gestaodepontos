@@ -46,7 +46,7 @@ public class UserService {
     User existingUser = userRepository
       .findById(id)
       .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado")
-      ); //new ResourceNotFoundException("User", "id", id));
+      );
     PasswordEncoder passwordEncoder = passwordEncoder();
 
     if (ValidarCPF.iscpf(user.getCpf())) {
@@ -54,7 +54,7 @@ public class UserService {
       existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
       existingUser.setFullname(user.getFullname());
       existingUser.setUserType(user.getUserType());
-      // existingUser.setWorkdays(user.getWorkdays());
+      existingUser.setWorkdays(user.getWorkdays());
       return userRepository.save(existingUser);
     } else {
       throw new InvalidDataException("CPF inválido");
