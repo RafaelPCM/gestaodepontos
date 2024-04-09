@@ -32,7 +32,7 @@ public class UserController {
   }
 
   @GetMapping("/{cpf}")
-  public Optional<User> getUserByUsername(@PathVariable String cpf) {
+  public Optional<User> getUserByCpf(@PathVariable String cpf) {
     return userService.findUserByCpf(cpf);
   }
 

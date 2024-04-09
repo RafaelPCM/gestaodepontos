@@ -99,23 +99,23 @@ Verificar em "Local Client" a versão do PostgreSQL requerida.
 
 #### PARA RODAR A APLICAÇÃO
 
-Clonar o projeto escolhido, provavelmente será solicitado para que faça o login com a conta do GitLab, ao logar, escolher a branch (git checkout {nome da branch}), por exemplo, a develop, mudar o profile no arquivo application.properties (para dev ou dev-infra), rodar aplicação via VSCode clicando em "Run" e "Start Debugging" ou apertando F5.
+Clonar o projeto escolhido, provavelmente será solicitado para que faça o login com a conta do Github/GitLab, ao logar, escolher a branch (git checkout {nome da branch}), por exemplo, a develop, mudar o profile no arquivo application.properties (para dev ou dev-infra), rodar aplicação via VSCode clicando em "Run" e "Start Debugging" ou apertando F5.
 
 Usuário teste:
 
 (Usuário Administrador)
 
-Nome: admin
+Login: 00000000000
 
-Senha: 123456
+Senha: 123
 
 ou
 
 (Usuário Comum)
 
-Nome: user
+Login: 12312312312
 
-Senha: 123456
+Senha: 123
 
 
 ##### PARA ACESSAR A DOCUMENTAÇÃO DE CADA API (SWAGGER)
@@ -135,35 +135,3 @@ https://medium.com/trainingcenter/utilizando-o-fluxo-git-flow-e63d5e0d5e04
 
 https://www.atlassian.com/br/git/tutorials/comparing-workflows/gitflow-workflow
 
-
-
-
-
-
-
-
-
-
-
-O sistema deve ter flexibilidade para aceitar entradas de registros de pontos 
-em qualquer horário, dada a situações de imprevistos, atrasos ou cargas 
-extras de trabalho;
-Exemplos de registros de pontos de jornada de trabalho válida para um regime 
-de 8 horas:
-0828  Horário de início de expediente,
-1215  Horário de saída para pausa para almoço,
-1315  Horário de retorno de pausa para almoço,
-1728  Horário de saída de expediente.
-
-
-if(WorkdayType == "SIX_HOUR_CONTINUOUS") {
-    pausa = pausa
-} else if(WorkdayType == "EIGHT_HOUR_WITH_BREAK") {
-    if(pausa.count == 0) {
-        "pausa para o almoço"
-    } elseif(pausa.count == 1){
-        "volta do almoço"
-    } else { #ps: se pausou uma vez, tem que voltar para poder finalizar o expediente
-        pausa
-    }
-}
