@@ -164,16 +164,6 @@ public class WorkdayService {
     }
 
 
-    //     if (workday.getUser().getWorkdayType() == WorkdayType.SIX_HOUR_CONTINUOUS) {
-    //       if (pointType != PointType.ENTRY) {
-    //         throw new IllegalArgumentException("First entry for a continuous workday must be ENTRY");
-    //       }
-    //     } else if (workday.getUser().getWorkdayType() == WorkdayType.EIGHT_HOUR_WITH_BREAK) {
-    //       if (pointType != PointType.ENTRY || workdayEntryRepository.findWorkdayEntryByWorkdayId(workday.getId()).size() < 3) {
-    //         throw new IllegalArgumentException("Eight-hour workday requires at least 3 entries (ENTRY-EXIT-ENTRY)");
-    //       }
-    //     }
-
 
     private double calculateWorkedHours(Workday workday, double lunchBreak) {
         double workHours = 0;
@@ -183,9 +173,7 @@ public class WorkdayService {
         List<WorkdayEntry> entries = workday.getWorkdayEntries();
         Collections.sort(entries, (entry1, entry2) -> entry1.getDateTimeRecordEntry().compareTo(entry2.getDateTimeRecordEntry()));
 
-        // lunchBreak é o tempo minimo que preciso ter de pausa
         if(workday.getUser().getWorkdayType() == WorkdayType.EIGHT_HOUR_WITH_BREAK) {
-            // preciso pegar o tempo entre os EXIT e os proximos ENTRY e diminuir de lunchBreak ai vou saber se tirou o tempo minimo
 
             for (int i = 0; i < entries.size() - 1; i++) {
                 LocalDateTime start = entries.get(i).getDateTimeRecordEntry();
@@ -194,14 +182,12 @@ public class WorkdayService {
                 if (entries.get(i).getPointType() == PointType.EXIT && entries.get(i + 1).getPointType() == PointType.ENTRY) {
                     pause += java.time.Duration.between(start, end).toHours();
                 }
-                // conferir se ta certo
                 pauseAndLunchBreak = pause;
                 workHours += start.until(end, java.time.temporal.ChronoUnit.HOURS);
             }
     
             return workHours - pauseAndLunchBreak;
         } else {
-            // nao precisa considerar o lunchBreak
 
             for (int i = 0; i < entries.size() - 1; i++) {
                 LocalDateTime start = entries.get(i).getDateTimeRecordEntry();
