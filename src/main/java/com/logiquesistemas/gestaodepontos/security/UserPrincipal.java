@@ -13,14 +13,14 @@ import com.logiquesistemas.gestaodepontos.model.User;
 @Getter
 public class UserPrincipal {
 
-  private String username;
+  private String cpf;
   private String password;
   private UserType userType;
 
   private Collection<? extends GrantedAuthority> authorities;
 
   private UserPrincipal(User user) {
-    this.username = user.getCpf();
+    this.cpf = user.getCpf();
     this.password = user.getPassword();
     this.userType = user.getUserType();
 

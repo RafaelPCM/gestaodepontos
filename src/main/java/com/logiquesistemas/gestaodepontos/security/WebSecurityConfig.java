@@ -23,7 +23,7 @@ import com.logiquesistemas.gestaodepontos.repository.UserRepository;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-// @EnableGlobalMethodSecurity(prePostEnabled = true) // Enable method-level security annotations
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
   private final CustomBasicAuthenticationFilter customBasicAuthenticationFilter;
@@ -77,7 +77,7 @@ public class WebSecurityConfig {
       )
       .authorizeHttpRequests(request ->
         request
-          .requestMatchers(HttpMethod.POST, "/user/**")
+          .requestMatchers(HttpMethod.POST, "/login/**")
           .permitAll()
           .anyRequest()
           .authenticated()

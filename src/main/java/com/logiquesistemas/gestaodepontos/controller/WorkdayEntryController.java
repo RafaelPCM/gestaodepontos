@@ -3,6 +3,7 @@ package com.logiquesistemas.gestaodepontos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logiquesistemas.gestaodepontos.dto.WorkdayEntryDTO;
-
 import com.logiquesistemas.gestaodepontos.model.WorkdayEntry;
 import com.logiquesistemas.gestaodepontos.service.WorkdayEntryService;
 
 @RestController
 @RequestMapping("/workdayEntries")
+@CrossOrigin(origins = "*")
 public class WorkdayEntryController {
     @Autowired
     private WorkdayEntryService workdayEntryService;
