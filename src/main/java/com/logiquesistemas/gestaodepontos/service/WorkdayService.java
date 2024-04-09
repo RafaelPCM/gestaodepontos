@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import com.logiquesistemas.gestaodepontos.enums.WorkdayType;
 import com.logiquesistemas.gestaodepontos.model.User;
 import com.logiquesistemas.gestaodepontos.model.Workday;
 import com.logiquesistemas.gestaodepontos.model.WorkdayEntry;
+import com.logiquesistemas.gestaodepontos.repository.UserRepository;
 import com.logiquesistemas.gestaodepontos.repository.WorkdayEntryRepository;
 import com.logiquesistemas.gestaodepontos.repository.WorkdayRepository;
 
@@ -29,6 +31,9 @@ public class WorkdayService {
 
     @Autowired
     private WorkdayEntryRepository workdayEntryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Workday> findByUserId(Long userId) {
         return workdayRepository.findWorkdayByUserId(userId);
@@ -43,12 +48,31 @@ public class WorkdayService {
     }
 
 
-
-
+    private boolean isValidWorkdayForEightHourWithBreak(List<Workday> workdays) {
+        for (Workday workday : workdays) {
+            List<WorkdayEntry> entries = workday.getWorkdayEntries();
+            int entryCount = 0;
+            int exitCount = 0;
+    
+            for (WorkdayEntry entry : entries) {
+                if (entry.getPointType() == PointType.ENTRY) {
+                    entryCount++;
+                } else if (entry.getPointType() == PointType.EXIT) {
+                    exitCount++;
+                }
+            }
+    
+            if (entryCount >= 2 && exitCount >= 2 && exitCount > entryCount) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public Workday createWorkday(Long userId, LocalDateTime dateTimeRecordEntry) {
-        
+        Optional<User> user = userRepository.findById(userId);
+
         WorkdaySummaryDTO summary = getLastWorkdaySummary(userId, dateTimeRecordEntry);
         List<Workday> workdays = workdayRepository.findWorkdayByUserId(userId);
         PointType lastPointType = null;
@@ -74,6 +98,9 @@ public class WorkdayService {
         }
 
         if (summary.isWorkdayComplete() && lastPointType == PointType.EXIT) {
+            if (user.get().getWorkdayType() == WorkdayType.EIGHT_HOUR_WITH_BREAK && !isValidWorkdayForEightHourWithBreak(workdays)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O regime de trabalho do usuario requer pelo menos uma pausa de 1 hora para o almoco");
+            }
             try {
                 Workday workday = new Workday();
                 workday.setUser(User.builder().id(userId).build());
