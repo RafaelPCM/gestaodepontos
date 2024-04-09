@@ -19,6 +19,9 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
+  // @Autowired
+  // private CPFValidationService cpfValidationService;
+
   public List<User> findAll() {
     return userRepository.findAll();
   }
@@ -29,7 +32,8 @@ public class UserService {
 
   public User save(User user) {
     PasswordEncoder passwordEncoder = passwordEncoder();
-    if (ValidarCPF.iscpf(user.getCpf())) {
+    // if (cpfValidationService.isValid(user.getCpf())) {
+      if (ValidarCPF.iscpf(user.getCpf())) {
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       return userRepository.save(user);
     } else {
@@ -49,7 +53,8 @@ public class UserService {
       );
     PasswordEncoder passwordEncoder = passwordEncoder();
 
-    if (ValidarCPF.iscpf(user.getCpf())) {
+    // if (cpfValidationService.isValid(user.getCpf())) {
+      if (ValidarCPF.iscpf(user.getCpf())) {
       existingUser.setCpf(user.getCpf());
       existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
       existingUser.setFullname(user.getFullname());

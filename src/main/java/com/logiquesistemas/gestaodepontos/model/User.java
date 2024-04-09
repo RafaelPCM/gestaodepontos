@@ -18,6 +18,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Objects;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,4 +49,26 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @JsonIgnore
   private List<Workday> workdays;
+
+  
+
+  @Override
+  public int hashCode() {
+      return Objects.hash(id, cpf, password, fullname, userType, workdayType);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+      if (o == this) return true;
+      if (!(o instanceof User)) {
+          return false;
+      }
+      User other = (User) o;
+      return Objects.equals(id, other.id) &&
+            Objects.equals(cpf, other.cpf) &&
+            Objects.equals(password, other.password) &&
+            Objects.equals(fullname, other.fullname) &&
+            Objects.equals(userType, other.userType) &&
+            Objects.equals(workdayType, other.workdayType);
+  }
 }
