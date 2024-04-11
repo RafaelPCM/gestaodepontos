@@ -41,7 +41,7 @@ public class WebSecurityConfig {
       adminUser.setCpf("00000000000");
       adminUser.setPassword(passwordEncoder.encode("123"));
       adminUser.setUserType(UserType.ADMIN);
-      adminUser.setFullname("Admin User");
+      adminUser.setFullName("Admin User");
       adminUser.setWorkdayType(WorkdayType.SIX_HOUR_CONTINUOUS);
       userRepository.save(adminUser);
       System.out.println("Usuário administrador criado com sucesso.");
@@ -59,7 +59,7 @@ public class WebSecurityConfig {
       commonUser.setCpf("12312312312");
       commonUser.setPassword(passwordEncoder.encode("123"));
       commonUser.setUserType(UserType.COMMON);
-      commonUser.setFullname("Common User");
+      commonUser.setFullName("Common User");
       commonUser.setWorkdayType(WorkdayType.EIGHT_HOUR_WITH_BREAK);
       userRepository.save(commonUser);
       System.out.println("Usuário administrador criado com sucesso.");

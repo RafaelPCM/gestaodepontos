@@ -1,5 +1,8 @@
 package com.logiquesistemas.gestaodepontos.controller;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +27,7 @@ public class LoginController {
   private UserRepository userRepository;
 
   @PostMapping
-  public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+  public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest) {
     String cpf = loginRequest.getCpf();
     String password = loginRequest.getPassword();
 
@@ -32,14 +35,22 @@ public class LoginController {
     User user = userRepository.findByCpf(cpf);
 
     if (user == null) {
-      return new ResponseEntity<>("User does not exist", HttpStatus.UNAUTHORIZED);
+      return new ResponseEntity<>(new HashMap<>(), HttpStatus.UNAUTHORIZED);
     }
 
-    // Verifica se a senha fornecida corresponde à senha armazenada
     if (passwordEncoder().matches(password, user.getPassword())) {
-      return new ResponseEntity<>("Login successful!", HttpStatus.OK);
+      
+      // Criar um mapa para armazenar os dados do usuário
+      Map<String, Object> userData = new HashMap<>();
+      userData.put("id", user.getId());
+      userData.put("cpf", user.getCpf());
+      userData.put("fullName", user.getFullName());
+      userData.put("userType", user.getUserType());
+      userData.put("workdayType", user.getWorkdayType());
+    
+      return new ResponseEntity<>(userData, HttpStatus.OK);
     } else {
-      return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+      return new ResponseEntity<>(new HashMap<>(), HttpStatus.UNAUTHORIZED);
     }
   }
 

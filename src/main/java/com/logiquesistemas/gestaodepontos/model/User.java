@@ -37,8 +37,8 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "fullname")
-  private String fullname;
+  @Column(name = "fullName")
+  private String fullName;
 
   private UserType userType;
 
@@ -46,5 +46,5 @@ public class User {
   
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @JsonIgnore
-  private List<Workday> workdays;
+  private List<Workday> workdays;  
 }
