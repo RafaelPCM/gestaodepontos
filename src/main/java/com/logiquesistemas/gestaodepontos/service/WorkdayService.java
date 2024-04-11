@@ -66,7 +66,7 @@ public class WorkdayService {
                     exitCount++;
                     lastExitTime = entry.getDateTimeRecordEntry();
                     if (lastEntryTime != null) {
-                        totalLunchDuration = totalLunchDuration.plus(Duration.between(lastExitTime, lastEntryTime)); // Adicione a duração entre entrada e saída à duração total
+                        totalLunchDuration = totalLunchDuration.plus(Duration.between(lastExitTime, lastEntryTime));
                         System.out.println(totalLunchDuration);
                     }
                 }
