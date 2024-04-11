@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.time.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,16 +54,26 @@ public class WorkdayService {
             List<WorkdayEntry> entries = workday.getWorkdayEntries();
             int entryCount = 0;
             int exitCount = 0;
+            LocalDateTime lastEntryTime = null;
+            LocalDateTime lastExitTime = null;
+            Duration totalLunchDuration = Duration.ZERO;
     
             for (WorkdayEntry entry : entries) {
                 if (entry.getPointType() == PointType.ENTRY) {
                     entryCount++;
+                    lastEntryTime = entry.getDateTimeRecordEntry();
                 } else if (entry.getPointType() == PointType.EXIT) {
                     exitCount++;
+                    lastExitTime = entry.getDateTimeRecordEntry();
+                    if (lastEntryTime != null) {
+                        totalLunchDuration = totalLunchDuration.plus(Duration.between(lastExitTime, lastEntryTime)); // Adicione a duração entre entrada e saída à duração total
+                        System.out.println(totalLunchDuration);
+                    }
                 }
             }
-    
-            if (entryCount >= 2 && exitCount >= 2 && exitCount > entryCount) {
+            
+            // TODO Corrigir calculo da hora do almoco
+            if (entryCount >= 2 && exitCount >= 2 && totalLunchDuration.toHours() >= 1) {
                 return true;
             }
         }
@@ -100,6 +111,8 @@ public class WorkdayService {
         if (summary.isWorkdayComplete() && lastPointType == PointType.EXIT) {
             if (user.get().getWorkdayType() == WorkdayType.EIGHT_HOUR_WITH_BREAK && !isValidWorkdayForEightHourWithBreak(workdays)) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O regime de trabalho do usuario requer pelo menos uma pausa de 1 hora para o almoco");
+            } else {
+                
             }
             try {
                 Workday workday = new Workday();

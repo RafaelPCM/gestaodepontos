@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,12 +32,26 @@ public class UserService {
     return userRepository.findUserByCpf(cpf);
   }
 
-  public User save(User user) {
+  public ResponseEntity<String> save(User user) {
     PasswordEncoder passwordEncoder = passwordEncoder();
+    User userExists = userRepository.findByCpf(user.getCpf());
+    
+
     // if (cpfValidationService.isValid(user.getCpf())) {
       if (ValidarCPF.iscpf(user.getCpf())) {
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      return userRepository.save(user);
+      if(userExists != null) {
+        // Verifica se o CPF já está cadastrado
+        return new ResponseEntity<>("CPF already registered", HttpStatus.BAD_REQUEST);
+      } else {
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+  
+        userRepository.save(user);
+  
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+      }
+      
     } else {
       throw new InvalidDataException("CPF inválido");
     }
@@ -57,7 +73,7 @@ public class UserService {
       if (ValidarCPF.iscpf(user.getCpf())) {
       existingUser.setCpf(user.getCpf());
       existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-      existingUser.setFullname(user.getFullname());
+      existingUser.setFullName(user.getFullName());
       existingUser.setUserType(user.getUserType());
       existingUser.setWorkdays(user.getWorkdays());
       return userRepository.save(existingUser);

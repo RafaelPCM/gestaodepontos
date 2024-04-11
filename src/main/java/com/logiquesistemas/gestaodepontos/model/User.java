@@ -39,8 +39,8 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "fullname")
-  private String fullname;
+  @Column(name = "fullName")
+  private String fullName;
 
   private UserType userType;
 
@@ -48,13 +48,13 @@ public class User {
   
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @JsonIgnore
-  private List<Workday> workdays;
+  private List<Workday> workdays;  
 
   
 
   @Override
   public int hashCode() {
-      return Objects.hash(id, cpf, password, fullname, userType, workdayType);
+      return Objects.hash(id, cpf, password, fullName, userType, workdayType);
   }
 
   @Override
@@ -67,7 +67,7 @@ public class User {
       return Objects.equals(id, other.id) &&
             Objects.equals(cpf, other.cpf) &&
             Objects.equals(password, other.password) &&
-            Objects.equals(fullname, other.fullname) &&
+            Objects.equals(fullName, other.fullName) &&
             Objects.equals(userType, other.userType) &&
             Objects.equals(workdayType, other.workdayType);
   }

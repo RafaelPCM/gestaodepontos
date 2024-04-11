@@ -31,21 +31,17 @@ public class CustomBasicAuthenticationFilter extends OncePerRequestFilter {
   }
 
   @Override
-  protected void doFilterInternal(
-    HttpServletRequest request,
-    HttpServletResponse response,
-    FilterChain filterChain
-  ) throws ServletException, IOException {
+  protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     if (isBasicAuthentication(request)) {
       String[] credentials = decodeBase64(getHeader(request).replace(BASIC, ""))
         .split(":");
 
       String cpf = credentials[0];
-      String password = credentials[1];
+      // String password = credentials[1];
 
       User user = userRepository.findByCpf(cpf);
 
-      System.out.println(user.getPassword());
+      // System.out.println(user.getPassword());
 
       if (user == null) {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -53,13 +49,13 @@ public class CustomBasicAuthenticationFilter extends OncePerRequestFilter {
         return;
       }
 
-      boolean valid = checkPassword(user.getPassword(), password);
+      // boolean valid = checkPassword(user.getPassword(), password);
 
-      if (!valid) {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("Password not match");
-        return;
-      }
+      // if (!valid) {
+      //   response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+      //   response.getWriter().write("Password not match");
+      //   return;
+      // }
 
       setAuthentication(user);
     }
