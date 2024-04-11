@@ -24,7 +24,11 @@ public class UserService {
   // @Autowired
   // private CPFValidationService cpfValidationService;
 
-  public List<User> findAll() {
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+public List<User> findAll() {
     return userRepository.findAll();
   }
 
@@ -70,7 +74,7 @@ public class UserService {
     PasswordEncoder passwordEncoder = passwordEncoder();
 
     // if (cpfValidationService.isValid(user.getCpf())) {
-      if (ValidarCPF.iscpf(user.getCpf())) {
+    if (ValidarCPF.iscpf(user.getCpf())) {
       existingUser.setCpf(user.getCpf());
       existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
       existingUser.setFullName(user.getFullName());

@@ -1,4 +1,4 @@
-package com.logiquesistemas.enums;
+package com.logiquesistemas.gestaodepontos.enums;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

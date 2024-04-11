@@ -1,8 +1,9 @@
 package com.logiquesistemas.gestaodepontos.service;
 
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -18,12 +19,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.logiquesistemas.gestaodepontos.enums.UserType;
 import com.logiquesistemas.gestaodepontos.model.User;
 import com.logiquesistemas.gestaodepontos.repository.UserRepository;
+
+
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -34,6 +39,12 @@ public class UserServiceTest {
 
     @MockBean
     private UserRepository userRepository;
+
+    @Before
+    public void setUp() {
+        userRepository = mock(UserRepository.class);
+        userService = new UserService(userRepository);
+    }
 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -48,6 +59,8 @@ public class UserServiceTest {
         List<User> actualUsers = userService.findAll();
 
         assertEquals(mockUsers, actualUsers);
+        assertNotNull(actualUsers);
+        assertEquals(2, actualUsers.size());
     }
 
     @Test
@@ -57,7 +70,7 @@ public class UserServiceTest {
         User mockUser = User.builder()
                     .cpf("54681600059")
                     .password("password")
-                    .fullname("John Doe")
+                    .fullName("John Doe")
                     .userType(UserType.COMMON)
                     .build();
 
@@ -68,6 +81,8 @@ public class UserServiceTest {
 
         assertTrue(actualUser.isPresent());
         assertEquals(mockUser, actualUser.get());
+        assertNotNull(actualUser);
+        assertTrue(actualUser.isPresent());
     }
 
     @Test
@@ -91,13 +106,14 @@ public class UserServiceTest {
         User newUser = User.builder()
                     .cpf("12013543077")
                     .password("password")
-                    .fullname("Jane Doe")
+                    .fullName("Jane Doe")
                     .userType(UserType.COMMON)
                     .build();
 
-        Mockito.when(userService.passwordEncoder()).thenReturn(new BCryptPasswordEncoder());
-
+        ResponseEntity<String> savedUser = userService.save(newUser);
         Mockito.verify(userRepository).save(newUser);
+        assertEquals(HttpStatus.OK, savedUser.getStatusCode());
+        assertEquals("User registered successfully", savedUser.getBody());
 
     }
 
@@ -112,19 +128,15 @@ public class UserServiceTest {
         User newUser = User.builder()
                     .cpf("55555555555")
                     .password("password")
-                    .fullname("Jane Doe")
+                    .fullName("Jane Doe")
                     .userType(UserType.COMMON)
                     .build();
                     
-        
-
-        Mockito.when(userService.passwordEncoder()).thenReturn(new BCryptPasswordEncoder());
-
         assertThrows(InvalidDataException.class, () -> userService.save(newUser));
 
     }
 
-    // PS: vai dar erro pois as senhas sao criptografadas entao vai dar valor diferente.
+
     @Test
     public void testUpdate_ShouldUpdateUser() {
         Long userId = 1L;
@@ -135,10 +147,10 @@ public class UserServiceTest {
         UserType oldUserType = UserType.ADMIN;
     
         User existingUser = User.builder()
-            .id(userId) // Set ID for the existing user
+            .id(userId)
             .cpf(oldCpf)
             .password(oldPassword)
-            .fullname(oldFullname)
+            .fullName(oldFullname)
             .userType(oldUserType)
             .build();
     
@@ -151,14 +163,21 @@ public class UserServiceTest {
             .id(userId)
             .cpf(newCpf)
             .password(encodedPassword)
-            .fullname(newFullname)
+            .fullName(newFullname)
             .userType(newUserType)
             .build();
     
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+        Mockito.when(userRepository.save(existingUser)).thenReturn(updatedUser);
         
-        assertEquals(updatedUser, existingUser);
+        User userReturned = userService.update(userId, existingUser);
+
+
+        assertEquals(userReturned.getId(), updatedUser.getId());
+        assertEquals(userReturned.getCpf(), updatedUser.getCpf());
+        assertEquals(userReturned.getFullName(), updatedUser.getFullName());
+        assertEquals(userReturned.getUserType(), updatedUser.getUserType());
     
-        Mockito.verify(userRepository).save(updatedUser);
+        Mockito.verify(userRepository).save(existingUser);
     }
 }
