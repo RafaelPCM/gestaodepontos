@@ -135,3 +135,70 @@ https://medium.com/trainingcenter/utilizando-o-fluxo-git-flow-e63d5e0d5e04
 
 https://www.atlassian.com/br/git/tutorials/comparing-workflows/gitflow-workflow
 
+
+
+
+#### Requisitos atendidos:
+
+- [X] O sistema deve ser protegido por login e senha, e somente após autenticado o usuário poderá visualizar os dados; 
+
+- [X] Os dados de usuários e pontos devem ser persistidos em banco de dados;
+
+- [X] Um ponto representa o registro de entrada ou saída de expediente durante a jornada de trabalho de um usuário (colaborador);
+O sistema deve ter suporte a dois tipos de regimes de jornadas de trabalho, são eles: 
+
+- [X] Regime de 6 horas contínuas de trabalho, sem previsão de pausas;
+
+Esse ponto do regime de 8hrs com pausa minima prevista de 1h foi implementado parcialmente, ficou faltando corrigir a logica de calcular o horario da pausa, mas ele verifica se o regime é de 8hrs ou 6hrs.
+
+- [ ] Regime de 8 horas de trabalho, com previsão de pausa mínima de 1 hora para almoço;
+
+
+- [X] O sistema deve ter flexibilidade para aceitar entradas de registros de pontos em qualquer horário, dada a situações de imprevistos, atrasos ou cargas extras de trabalho;
+
+Exemplos de registros de pontos de jornada de trabalho válida para um regime de 8 horas:
+08:28 -> Horário de início de expediente,
+12:15 -> Horário de saída para pausa para almoço,
+13:15 -> Horário de retorno de pausa para almoço,
+17:28 -> Horário de saída de expediente.
+
+- [X] O sistema deve ter suporte para múltiplos registros de pontos em um dia, não se restringindo ao limite de quatro pontos. 
+Por exemplo: 	
+08: 28 (início de expediente) -> 12:15 (pausa para almoço) -> 13:15 (retorno da pausa para almoço) -> 15:30 (saída esporádica) -> 16:30 (retorno da saída esporádica) -> 18:28 (fim de expediente);
+
+- [X] O sistema deve ter suporte para dois tipos de usuários: Usuário Administrador e Usuário Comum;	
+
+- [X] O usuário administrador terá permissão para cadastro de novos usuários (usuário comum);	
+
+- [X] Ao cadastrar um novo usuário comum, o administrador deverá informar o tipo de regime de jornada de trabalho daquele colaborador;	
+
+- [X] O usuário comum não poderá cadastrar novos usuários;	
+
+O usuário comum terá acesso as seguintes funcionalidades:
+
+- [X] Registrar ponto: O usuário poderá informar a data/hora para registro de um novo ponto de trabalho na jornada;		
+
+- [X] Resumo de jornada do dia atual: Com base nos pontos cadastrados para o dia, o usuário poderá verificar quais pontos foram contemplados, bem como se a jornada prevista para o dia está completa ou não (entende-se completa quando a duração do expediente com base nos pontos atende o regime de jornada de trabalho do colaborador);
+
+
+- [X] Previsão para completar jornada: O sistema deverá apresentar, com base nos pontos, resumo de jornada e regime de jornada do colaborador, a quantidade de horas restantes para completar a jornada do dia;
+
+
+- [X] Horas excedidas da jornada:  O sistemas deverá apresentar, com base nos pontos, resumo de jornada e regime de jornada do colaborador, a quantidade de horas excedidas (extras) na jornada do dia;
+
+
+##### Observações
+
+- [X] O projeto deverá vir documentado no repositório (arquivo README.md) contendo as versões das linguagens, principais bibliotecas/frameworks, como executar o projeto, funcionalidades implementadas e funcionalidades idealizadas, mesmo que não desenvolvidas. 
+
+Feito parcialmente, creio que consegui cobrir uma boa quantidade do codigo, com mais tempo seria possivel cobrir tudo.
+
+- [X] Implemente módulos de testes unitários, principalmente para validação de fluxos de processamento das datas dos pontos;
+
+Infelizmente não tive tempo suficiente para subir o projeto para cloud, mas os scripts que facilitam isso já foram quase todos (se nao todos) feitos.
+
+- [ ] Se possível, disponibilize o sistema desenvolvido em algum serviço cloud e que esteja acessível para avaliação prévia;
+
+- [X] Junto às documentações, apresente diagrama de entidade/relacionamento DER que reflete a arquitetura de dados aplicada na solução;
+
+- [X] Boas práticas de Git, testes unitários e qualidade de código serão considerados na avaliação.
