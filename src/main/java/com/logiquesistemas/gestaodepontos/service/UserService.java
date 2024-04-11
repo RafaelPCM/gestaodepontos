@@ -21,7 +21,14 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<User> findAll() {
+  // @Autowired
+  // private CPFValidationService cpfValidationService;
+
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+public List<User> findAll() {
     return userRepository.findAll();
   }
 
@@ -34,7 +41,8 @@ public class UserService {
     User userExists = userRepository.findByCpf(user.getCpf());
     
 
-    if (ValidarCPF.iscpf(user.getCpf())) {
+    // if (cpfValidationService.isValid(user.getCpf())) {
+      if (ValidarCPF.iscpf(user.getCpf())) {
       if(userExists != null) {
         // Verifica se o CPF já está cadastrado
         return new ResponseEntity<>("CPF already registered", HttpStatus.BAD_REQUEST);
@@ -65,6 +73,7 @@ public class UserService {
       );
     PasswordEncoder passwordEncoder = passwordEncoder();
 
+    // if (cpfValidationService.isValid(user.getCpf())) {
     if (ValidarCPF.iscpf(user.getCpf())) {
       existingUser.setCpf(user.getCpf());
       existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
