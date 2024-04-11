@@ -274,7 +274,7 @@ public class WorkdayService {
     public WorkdaySummaryDTO getCurrentWorkdaySummary(Long userId, LocalDateTime dateTime) {
         List<Workday> workdays = workdayRepository.findWorkdayByUserId(userId);
         if (workdays.isEmpty()) {
-            return null; // No workdays found
+            return null;
         } else {
             Workday currentWorkday = workdays.stream()
                 .filter(w -> w.getWorkdayEntries().get(0).getDateTimeRecordEntry().toLocalDate().isEqual(dateTime.toLocalDate()))
@@ -300,5 +300,6 @@ public class WorkdayService {
         Workday currentWorkday = getCurrentWorkday(userId, dateTime);
         return currentWorkday.getWorkdayEntries();
     }
+
 
 }
