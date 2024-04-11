@@ -118,7 +118,9 @@ Login: 12312312312
 Senha: 123
 
 
-##### PARA ACESSAR A DOCUMENTAÇÃO DE CADA API (SWAGGER)
+##### COLLECTION DO POSTMAN
+
+Para facilitar o teste da aplicação, criei a uma collection no POSTMAN para fazer as requisições, bastando apenas ter criado o banco de dados previamente como explicado anteriormente, rodar aplicação e importar a collection para testar.
 
 Swagger Gestao De Pontos:
 

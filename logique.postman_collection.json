@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "2acf40bd-ff18-4969-a894-18e47c8828d0",
+		"name": "logique",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18608396"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "UserRegister",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"58256676019\",\n  \"password\": \"123\",\n  \"fullname\": \"Usuario comum\",\n  \"userType\": \"COMMON\",\n  \"workdayType\": \"SIX_HOUR_CONTINUOUS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserRegister Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindUserByUsername",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/11737712474",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"11737712474"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"11737712474\",\n  \"password\": \"123\",\n  \"fullname\": \"Usuario Teste\",\n  \"userType\": \"COMMON\",\n  \"workdayType\": \"SIX_HOUR_CONTINUOUS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserByid",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/16",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workdays",
+			"item": [
+				{
+					"name": "getWorkdaysByUserId",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "11737712474",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/workdays/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workdays",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Workdays",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dateTimeRecordEntry\": \"2024-04-10T08:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/workdays/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workdays",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workday Entries",
+			"item": [
+				{
+					"name": "GetAll WorkEntries",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/workdayEntries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workdayEntries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get WorkEntries By WorkdayId",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/workdayEntries/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workdayEntries",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create WorkdayEntry",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "00000000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dateTimeRecordEntry\": \"2024-04-10T12:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/workdayEntries/65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"workdayEntries",
+								"65"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workday Management",
+			"item": [
+				{
+					"name": "LastWorkday",
+					"item": [
+						{
+							"name": "Last Workday Summary",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/last-summary/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"last-summary",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Last Remaining Hours",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/last-remaining-hours/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"last-remaining-hours",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Last Exceeded Hours",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/last-exceeded-hours/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"last-exceeded-hours",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Last Entries",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/last-exceeded-hours/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"last-exceeded-hours",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CurrentWorkday",
+					"item": [
+						{
+							"name": "CurrentWorkday Summary",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/current-summary/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"current-summary",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Current Remaining Hours",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/current-remaining-hours/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"current-remaining-hours",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Current Exceeded Hours",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/current-exceeded-hours/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"current-exceeded-hours",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Current Entries",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "00000000000",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/workdays/current-entries/5?dateTime=2024-04-10T08:00:00",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"workdays",
+										"current-entries",
+										"5"
+									],
+									"query": [
+										{
+											"key": "dateTime",
+											"value": "2024-04-10T08:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"cpf\": \"00000000000\",\r\n    \"password\": 123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
